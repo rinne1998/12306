@@ -50,7 +50,16 @@ def getDrvicesID(session):
         }]
         session.httpClint.set_cookies(cookies)
         session.cookies = cookies
-
+    elif TickerConfig.COOKIE_TYPE is 4:
+        API_url = 'http://182.61.45.39:8889/'
+        API_html = requests.get(API_url)
+        API_Json = json.loads(API_html.content)
+        cookies = [{
+            "RAIL_DEVICEID": API_Json.get('dfp'),
+            "RAIL_EXPIRATION": API_Json.get('exp'),
+        }]    
+        session.httpClint.set_cookies(cookies)
+        session.cookies = cookies
 
 def request_device_id(session):
     """
